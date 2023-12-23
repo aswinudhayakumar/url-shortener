@@ -12,6 +12,7 @@ func main() {
 	us := model.NewURLShortener()
 
 	router.UrlShortenerRouter(app.Group("/"), us)
+	router.MetricsRouter(app.Group("/metrics"), us)
 
 	app.Listen(":3000")
 }

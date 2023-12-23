@@ -1,6 +1,7 @@
 package router
 
 import (
+	"encoding/json"
 	"net/http"
 	"url-shortener/model"
 
@@ -38,5 +39,17 @@ func UrlShortenerRouter(router fiber.Router, us *model.UrlShortener) {
 			return c.Send([]byte{})
 		}
 		return c.SendString(data)
+	})
+}
+
+func MetricsRouter(router fiber.Router, us *model.UrlShortener) {
+	router.Get("/", func(c *fiber.Ctx) error {
+		data := us.GetMetrics()
+		response, err := json.Marshal(data)
+		if err != nil {
+			c.Status(http.StatusInternalServerError)
+			return c.Send([]byte{})
+		}
+		return c.Send(response)
 	})
 }
