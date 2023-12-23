@@ -2,14 +2,16 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
+
+	"url-shortener/model"
+	"url-shortener/router"
 )
 
 func main() {
 	app := fiber.New()
+	us := model.NewURLShortener()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello world!")
-	})
+	router.UrlShortenerRouter(app.Group("/"), us)
 
 	app.Listen(":3000")
 }
