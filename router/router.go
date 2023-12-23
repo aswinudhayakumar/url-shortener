@@ -8,6 +8,23 @@ import (
 )
 
 func UrlShortenerRouter(router fiber.Router, us *model.UrlShortener) {
+	router.Get("/short/:url", func(c *fiber.Ctx) error {
+		rurl := c.Params("url")
+		if rurl == "" {
+			c.Status(http.StatusBadRequest)
+			return c.SendString("URL not found")
+		}
+
+		mainURL := us.GetMainURL(rurl)
+
+		if mainURL == "" {
+			c.Status(http.StatusBadRequest)
+			return c.SendString("URL not found")
+		}
+
+		return c.Redirect(mainURL, 302)
+	})
+
 	router.Post("/", func(c *fiber.Ctx) error {
 		url := c.Query("url")
 		if url == "" {
