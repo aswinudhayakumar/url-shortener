@@ -1,5 +1,3 @@
-\*\*
-
 # URL_SHORTENER
 
 This service is writen in **go fiber** framework, as per its name, this returns a short URL for a URL that you are sharing.
@@ -13,7 +11,7 @@ This service has 3 Endpoints,
 
 With these below commands, you can run this service,
 
-- `make dev` to run this in developer mode.
+- `make dev` to run this in developer mode
 - `make build` to build the service
 - `make run-build` to run the service, which already has a build
 - `make run` to build and run the build
