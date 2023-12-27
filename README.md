@@ -4,7 +4,7 @@ This service is writen in **go fiber** framework, as per its name, this returns 
 
 This service has 3 Endpoints,
 
-- **shortURL** - http://localhost:3000/?url=https://www.youtube.com/, here you can share the URL that need to be shortened in the URL query param called `url`, in response this returns the shortened URL.
+- **shortURL** - http://localhost:3000/?url=https://www.youtube.com/, here you can share the URL that need to be shortened in the URL query param called `url`, in response this returns the shortened URL, copy it and use it in a browser.
 - **getMetrics** - http://0.0.0.0:3000/metrics. this returns the top 3 URLs shortened in this service.
 
 ## How to run ?
@@ -19,3 +19,7 @@ With these below commands, you can run this service,
 This service, runs on the port `3000`
 
 You can also pull this service as a image from here - https://hub.docker.com/r/aswin8799/url-shortener
+
+Here is a demo video showcasing, how to use this service.
+https://github.com/aswinudhayakumar/url-shortener/assets/30823667/11675c2c-339f-4139-b895-199387f32377
+
