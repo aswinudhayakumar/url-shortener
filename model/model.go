@@ -41,7 +41,8 @@ func (u *UrlShortener) ShortURL(request string) (string, error) {
 	}
 
 	newURL := fmt.Sprintf(baseURL + shortString)
-	u.data[shortString] = request
+	res := fmt.Sprint(request)
+	u.data[shortString] = res
 	err = u.addMetrics(request)
 	if err != nil {
 		return "", err
@@ -73,8 +74,9 @@ func (u *UrlShortener) addMetrics(request string) error {
 		return err
 	}
 
-	count := u.metrics[parsed.Host]
-	u.metrics[parsed.Host] = count + 1
+	key := fmt.Sprint(parsed.Host)
+	count := u.metrics[key]
+	u.metrics[key] = count + 1
 
 	return nil
 }
