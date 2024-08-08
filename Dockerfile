@@ -1,17 +1,14 @@
-FROM golang:1.21-alpine
+FROM golang:1.21-alpine AS builder
 
-WORKDIR /app
-COPY go.mod go.sum ./
-
+WORKDIR /build
+COPY . .
 RUN go mod download
 
-COPY main.go ./
-COPY helper/ ./helper
-COPY model/ ./model
-COPY router/ ./router
+RUN go build -o ./url-shortener
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /url-shortener
+FROM scratch
 
-EXPOSE 3000
+WORKDIR /app
+COPY --from=builder /build/url-shortener ./url-shortener
 
-CMD ["/url-shortener"]
+CMD ["/app/url-shortener"]
